@@ -1,5 +1,6 @@
 package com.example.mydemo;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,7 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.example.mydemo.activity.OrgContactActivity;
 import com.example.mydemo.adapter.MainItemAdapter;
+import com.example.mydemo.adapter.OrgContactAdapter;
 import com.example.mydemo.view.RecyclerViewItemDecoration;
 
 import java.util.ArrayList;
@@ -58,7 +61,8 @@ public class MainActivity extends AppCompatActivity implements BaseQuickAdapter.
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         switch (position){
             case 0:
-
+                Intent intent = new Intent(MainActivity.this, OrgContactActivity.class);
+                startActivity(intent);
                 break;
         }
     }
