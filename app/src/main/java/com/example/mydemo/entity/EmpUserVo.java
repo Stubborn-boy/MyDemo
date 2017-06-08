@@ -2,22 +2,15 @@ package com.example.mydemo.entity;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.example.mydemo.adapter.OrgContactAdapter;
-import com.google.gson.annotations.SerializedName;
 
-public class EmpUserVo implements MultiItemEntity, java.io.Serializable {
+
+public class EmpUserVo extends BaseUserVo implements MultiItemEntity, java.io.Serializable {
 
     private static final long serialVersionUID = 1L;
-    private String id;
-    @SerializedName("userName")
-    private String name;
-    private String account;
     private String sex;
     private String email;
-    @SerializedName("phone")
-    private String mobile;
+    private String phone;
     private String sign;
-    @SerializedName("picture")
-    private String photo;
     private String orgId;
     private String orgName;
     private String isSync;//同步标识：0：表示否; 1：表示是
@@ -41,22 +34,6 @@ public class EmpUserVo implements MultiItemEntity, java.io.Serializable {
         this.incomeDate = incomeDate;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getAccount() {
         return account;
     }
@@ -73,12 +50,12 @@ public class EmpUserVo implements MultiItemEntity, java.io.Serializable {
         this.email = email;
     }
 
-    public String getMobile() {
-        return mobile;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getSign() {
@@ -87,14 +64,6 @@ public class EmpUserVo implements MultiItemEntity, java.io.Serializable {
 
     public void setSign(String sign) {
         this.sign = sign;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
     }
 
     public String getIsSync() {
@@ -146,13 +115,13 @@ public class EmpUserVo implements MultiItemEntity, java.io.Serializable {
     public boolean equals(Object obj) {
         if (obj instanceof EmpUserVo) {
             EmpUserVo vo = (EmpUserVo) obj;
-            return (id.equals(vo.id));
+            return (uid.equals(vo.uid));
         }
         return false;
     }
 
     @Override
     public int hashCode() {
-        return id.hashCode();
+        return uid.hashCode();
     }
 }

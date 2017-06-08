@@ -1,20 +1,23 @@
-package com.example.mydemo.activity;
+package com.example.mydemo.fragment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -28,6 +31,7 @@ import com.example.mydemo.entity.EmpUserVo;
 import com.example.mydemo.entity.OrgVo;
 import com.example.mydemo.entity.ResultVo;
 import com.example.mydemo.utils.LogUtils;
+import com.example.mydemo.utils.SizeUtils;
 import com.example.mydemo.view.RecyclerViewItemDecoration;
 import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
@@ -39,18 +43,19 @@ import java.util.List;
 import okhttp3.Call;
 import okhttp3.Response;
 
+
 /**
- * Created by jack on 2017/5/21.
+ * Created by 71541 on 2017/5/22.
  */
 
-public class OrgContactActivity extends AppCompatActivity implements BaseQuickAdapter.OnItemClickListener, OrgContactAdapter.OnSubordinateClickListener {
+public class OrganizationFragment extends Fragment implements BaseQuickAdapter.OnItemClickListener, OrgContactAdapter.OnSubordinateClickListener{
 
-    private HorizontalScrollView horizontalScrollView;
-    private LinearLayout ll_shortcut;
-    private RecyclerView recyclerView;
+    HorizontalScrollView horizontalScrollView;
+    LinearLayout ll_shortcut;
+    RecyclerView recyclerView;
+
+    private Context context;
     private LinearLayoutManager linearLayoutManager;
-    private TextView tv_select;
-    private Button btn_ok;
     private OrgContactAdapter adapter;
     private List<MultiItemEntity> list = new ArrayList<>();
     private List<OrgVo> orgList = new ArrayList<>();
@@ -58,54 +63,79 @@ public class OrgContactActivity extends AppCompatActivity implements BaseQuickAd
     private List<AllVo> selectAllList = new ArrayList<>();
     private List<OrgVo> selectOrgList = new ArrayList<>();
     private List<EmpUserVo> selectEmpList = new ArrayList<>();
-    List<BaseUserVo> previousEmpList = new ArrayList<>();
+    private List<BaseUserVo> previousEmpList = new ArrayList<>();
     private AllVo curAllVo;
+    private OrganizationCallBack organizationCallBack;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_org_contact);
-        horizontalScrollView = (HorizontalScrollView)findViewById(R.id.horizontalScrollView);
-        ll_shortcut = (LinearLayout) findViewById(R.id.ll_shortcut);
-        tv_select = (TextView) findViewById(R.id.tv_select);
-        btn_ok = (Button) findViewById(R.id.btn_ok);
-        recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
-        linearLayoutManager = new LinearLayoutManager(this);
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        context = activity;
+        organizationCallBack = (OrganizationCallBack)activity;
+    }
+
+    public interface OrganizationCallBack{
+        void selectOrgEmpUser(List<OrgVo> selectOrgList, List<EmpUserVo> selectEmpList);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_org_contact, null, false);
+        horizontalScrollView = (HorizontalScrollView)view.findViewById(R.id.horizontalScrollView);
+        ll_shortcut = (LinearLayout)view.findViewById(R.id.ll_shortcut);
+        recyclerView = (RecyclerView)view.findViewById(R.id.recyclerView);
+        intview();
+        initDate();
+        return view;
+    }
+
+    protected void intview() {
+        linearLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.addItemDecoration(new RecyclerViewItemDecoration.Builder(this)
+        recyclerView.addItemDecoration(new RecyclerViewItemDecoration.Builder(context)
                 .color("#eeeeee")
-                .thickness(1)
+                .thickness(2)
                 .lastLineVisible(true)
                 .create());
         adapter = new OrgContactAdapter(list, previousEmpList, selectAllList, selectOrgList, selectEmpList);
         recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener(this);
         adapter.setOnSubordinateClickListener(this);
+    }
+
+    protected void initDate() {
         getOrgContacts("");
     }
 
     private void addView2HorizontalScrollView(OrgVo orgVo){
-        LinearLayout linearLayout = new LinearLayout(this);
-        LayoutParams ll_layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        LinearLayout linearLayout = new LinearLayout(context);
+        LinearLayout.LayoutParams ll_layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         linearLayout.setLayoutParams(ll_layoutParams);
         int count = ll_shortcut.getChildCount();
         if(count>0) {
-            LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-            ImageView imageView = new ImageView(this);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            ImageView imageView = new ImageView(context);
             imageView.setBackgroundResource(R.drawable.common_arrow);
             layoutParams.gravity = Gravity.CENTER_VERTICAL;
             imageView.setLayoutParams(layoutParams);
             linearLayout.addView(imageView);
         }
-        LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        TextView textView = new TextView(this);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        TextView textView = new TextView(context);
         textView.setText(orgVo.getName());
-        textView.setTextColor(Color.BLACK);
+        textView.setTextColor(Color.parseColor("#999999"));
+        textView.setEnabled(false);
         if(count>0) {
             LinearLayout linearLayout1 = (LinearLayout) ll_shortcut.getChildAt(count-1);
             TextView textView1 = (TextView) linearLayout1.getChildAt(linearLayout1.getChildCount()-1);
-            textView1.setTextColor(Color.BLUE);
+            textView1.setTextColor(Color.parseColor("#00A0E9"));
+            textView1.setEnabled(true);
         }
+        int padding = SizeUtils.dp2px(context, 10);
+        textView.setPadding(padding, padding, padding, padding);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+
         textView.setLayoutParams(layoutParams);
         textView.setTag(orgVo);
         textView.setOnClickListener(new View.OnClickListener() {
@@ -125,8 +155,9 @@ public class OrgContactActivity extends AppCompatActivity implements BaseQuickAd
     }
 
     private void clickTextView(TextView tv){
+        tv.setTextColor(Color.parseColor("#999999"));
+        tv.setEnabled(false);
         OrgVo orgVo = (OrgVo) tv.getTag();
-        tv.setTextColor(Color.BLACK);
         int index = ll_shortcut.indexOfChild((View) tv.getParent());
         int count  = ll_shortcut.getChildCount();
         ll_shortcut.removeViews(index+1,count-(index+1));
@@ -137,14 +168,15 @@ public class OrgContactActivity extends AppCompatActivity implements BaseQuickAd
         list.clear();
         orgList.clear();
         empList.clear();
+        adapter.notifyDataSetChanged();
         String url = "http://101.201.108.172:8280/masCustomer/service/UserInfoService/getEmployeeOrg";
         OkGo.post(url)
                 .tag(this)
-	            .params("servId", "")
-	            .params("orgCode", code)
-	            .params("servId", "")
-	            .params("loginId", "1213")
-	            .params("token", "311f4f508d776b115827e76bd11ae724")
+                .params("servId", "")
+                .params("orgCode", code)
+                .params("servId", "")
+                .params("loginId", "1213")
+                .params("token", "311f4f508d776b115827e76bd11ae724")
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Response response, Exception e) {
@@ -167,6 +199,58 @@ public class OrgContactActivity extends AppCompatActivity implements BaseQuickAd
                 });
     }
 
+//    private void getOrgContacts(String code){
+//        list.clear();
+//        orgList.clear();
+//        empList.clear();
+//        adapter.notifyDataSetChanged();
+//
+//        recyclerView.setVisibility(View.GONE);
+//        String uid = MarketUtils.getUserInfo(context).getUid();
+//        RequestParams params = new RequestParams();
+//        params.addBodyParameter("servId", "");
+//        params.addBodyParameter("orgCode", code);
+//        params.addBodyParameter("loginId", uid);
+//        params.addBodyParameter("token", MarketUtils.getUserInfo(context).getToken());
+//        httpUtils = new HttpUtils();
+//        //设置当前请求的缓存时间
+//        httpUtils.configDefaultHttpCacheExpiry(10000);
+//        //设置线程数
+//        httpUtils.configRequestThreadPoolSize(10);
+//        httpUtils.configResponseTextCharset("utf-8");
+//        handler = httpUtils.send(HttpRequest.HttpMethod.POST, ZTConstant.GET_ORG_CONTACTS_URL, params, new RequestCallBack<String>() {
+//            @Override
+//            public void onSuccess(ResponseInfo<String> responseInfo) {
+//                if (progressBar != null)
+//                    progressBar.setVisibility(View.GONE);
+//                if (recyclerView != null)
+//                    recyclerView.setVisibility(View.VISIBLE);
+//                MyLogger.commLog().e(responseInfo.result);
+//                ResultVo rVo = ResultParser.parseJSON(responseInfo.result, ResultVo.class);
+//                if (rVo != null) {
+//                    String result = rVo.getResult();
+//                    MyLogger.commLog().e("result--->" + rVo.getMsg().toString());
+//                    if (!TextUtils.isEmpty(result) && "success".equals(result)) {
+//                        Gson gson = new Gson();
+//                        String json = gson.toJson(rVo.getMsg());
+//                        OrgVo orgVo = ResultParser.parseJSON(json, OrgVo.class);
+//                        if (orgVo != null && ll_shortcut != null) {
+//                            if (ll_shortcut.getChildCount() == 0) {
+//                                addView2HorizontalScrollView(orgVo);
+//                            }
+//                            handleData(orgVo);
+//                        }
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(HttpException e, String s) {
+//                MyLogger.commLog().e(s);
+//            }
+//        });
+//    }
+
     private void handleData(OrgVo orgVo) {
         curAllVo = new AllVo();
         curAllVo.setOrgId(orgVo.getId());
@@ -176,10 +260,31 @@ public class OrgContactActivity extends AppCompatActivity implements BaseQuickAd
         empList.addAll(orgVo.getUsers());
         list.addAll(empList);
         adapter.setNewData(list);
+
+        if(selectAllList.contains(curAllVo)) {
+            if(orgList.size()>0){
+                if(!selectOrgList.contains(orgList.get(0))){
+                    selectAllList.remove(curAllVo);
+                }
+            }else if(empList.size()>0){
+                if(!selectEmpList.contains(empList.get(0))){
+                    selectAllList.remove(curAllVo);
+                }
+            }
+        }
     }
 
+    /**
+     * 条目点击事件
+     * @param adapter
+     * @param view
+     * @param position
+     */
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        if (adapter.getData().size() == 0 || position < 0) {
+            return;
+        }
         MultiItemEntity entity = (MultiItemEntity) adapter.getData().get(position);
         CheckBox checkbox = (CheckBox) view.findViewById(R.id.checkbox);
         checkbox.setChecked(!checkbox.isChecked());
@@ -197,7 +302,7 @@ public class OrgContactActivity extends AppCompatActivity implements BaseQuickAd
                     }
 
                     for(EmpUserVo empUserVo : empList){
-                        if(!selectEmpList.contains(empUserVo)){
+                        if(!selectEmpList.contains(empUserVo)&&!previousEmpList.contains(empUserVo)){
                             selectEmpList.add(empUserVo);
                         }
                     }
@@ -242,7 +347,7 @@ public class OrgContactActivity extends AppCompatActivity implements BaseQuickAd
             case OrgContactAdapter.EMP:
                 EmpUserVo empUserVo = (EmpUserVo) entity;
                 if(checkbox.isChecked()){
-                    if(!selectEmpList.contains(empUserVo)) {
+                    if(!selectEmpList.contains(empUserVo)&&!previousEmpList.contains(empUserVo)) {
                         selectEmpList.add(empUserVo);
                     }
                 }else{
@@ -259,23 +364,39 @@ public class OrgContactActivity extends AppCompatActivity implements BaseQuickAd
     }
 
     private void refreshSelectText() {
-        String str = "已选择" + selectOrgList.size()+ "个部门" + selectEmpList.size()+ "个人";
-        tv_select.setText(str);
+        if(organizationCallBack!=null){
+            organizationCallBack.selectOrgEmpUser(selectOrgList, selectEmpList);
+        }
         adapter.notifyDataSetChanged();
     }
 
+    /**
+     * 点击下级响应事件
+     * @param helper
+     * @param v
+     * @param position
+     */
     @Override
     public void onSubordinateClick(BaseViewHolder helper, View v, int position) {
-        OrgVo orgVo = (OrgVo) adapter.getData().get(position);
+        OrgVo orgVo = null;
+        if (adapter.getData().size() > 0 && position >= 0) {
+            orgVo = (OrgVo) adapter.getData().get(position);
+        }
+        if (orgVo == null)
+            return;
         addView2HorizontalScrollView(orgVo);
         getOrgContacts(orgVo.getId());
     }
 
+    /**
+     * 选择部门下所有人员
+     * @param orgVo
+     */
     private void selectAllUserByOrg(OrgVo orgVo){
         ArrayList<OrgVo> orgList = orgVo.getOrgVOs();
         ArrayList<EmpUserVo> userList = orgVo.getUsers();
         for(EmpUserVo empUserVo : userList){
-            if(!selectEmpList.contains(empUserVo)) {
+            if(!selectEmpList.contains(empUserVo)&&!previousEmpList.contains(empUserVo)) {
                 selectEmpList.add(empUserVo);
             }
         }
@@ -284,6 +405,10 @@ public class OrgContactActivity extends AppCompatActivity implements BaseQuickAd
         }
     }
 
+    /**
+     * 取消选择部门下所有人员
+     * @param orgVo
+     */
     private void unSelectAllUserByOrg(OrgVo orgVo){
         ArrayList<OrgVo> orgList = orgVo.getOrgVOs();
         ArrayList<EmpUserVo> userList = orgVo.getUsers();
@@ -298,5 +423,13 @@ public class OrgContactActivity extends AppCompatActivity implements BaseQuickAd
                 selectOrgList.remove(vo);
             }
         }
+    }
+
+    /**
+     * 设置之前已经选择的
+     * @param previousEmpList
+     */
+    public void setPreviousEmpList(List<BaseUserVo> previousEmpList){
+        this.previousEmpList = previousEmpList;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.mydemo.entity;
 
+
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.example.mydemo.adapter.OrgContactAdapter;
 
@@ -9,21 +10,12 @@ import java.io.Serializable;
  * Created by jack on 2017/5/21.
  */
 
-public class AllVo implements MultiItemEntity, Serializable{
-    private boolean isAll;
+public class AllVo implements MultiItemEntity, Serializable {
     private String orgId;
 
     @Override
     public int getItemType() {
         return OrgContactAdapter.ALL;
-    }
-
-    public boolean isAll() {
-        return isAll;
-    }
-
-    public void setAll(boolean all) {
-        isAll = all;
     }
 
     public String getOrgId() {
@@ -48,3 +40,4 @@ public class AllVo implements MultiItemEntity, Serializable{
         return orgId.hashCode();
     }
 }
+

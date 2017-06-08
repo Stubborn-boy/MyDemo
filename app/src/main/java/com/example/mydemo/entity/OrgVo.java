@@ -1,5 +1,6 @@
 package com.example.mydemo.entity;
 
+
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.example.mydemo.adapter.OrgContactAdapter;
 
@@ -7,12 +8,12 @@ import java.util.ArrayList;
 
 
 public class OrgVo implements MultiItemEntity, java.io.Serializable {
-//ZF机构
+    //ZF机构
     private static final long serialVersionUID = 1L;
-    private String id;//机构ID
-    private String code;//机构编码
-    private String name;//机构名称
-    private String pid;//上级
+    private String id;//[部门id]
+    private String code;//[部门编码]
+    private String name;//[部门名称]
+    private String pid;//[父级部门id]
 
     private String count;//部门人数
     private ArrayList<EmpUserVo> users;//机构所属用户
@@ -117,3 +118,4 @@ public class OrgVo implements MultiItemEntity, java.io.Serializable {
 
     }
 }
+

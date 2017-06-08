@@ -1,27 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_height="55dp"
     android:gravity="center_vertical"
-    android:background="@drawable/bg_item_selector">
+    android:background="@drawable/bg_item_selector"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp">
 
     <CheckBox
         android:id="@+id/checkbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="17dp"
+        android:layout_height="17dp"
         android:layout_marginLeft="16dp"
+        android:button="@null"
+        android:background="@drawable/group_circle_selector"
         android:clickable="false"/>
 
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:ellipsize="end"
+        android:textColor="#555555"
+        android:textSize="14sp"/>
 
     <TextView
         android:id="@+id/tv_count"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:textColor="#555555"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="18dp"
+        android:background="#E1E1E1"/>
 
     <LinearLayout
         android:id="@+id/ll_subordinate"
@@ -33,7 +47,9 @@
             android:id="@+id/tv_subordinate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="下级"/>
+            android:text="下级"
+            android:textColor="#00A0E9"
+            android:textSize="14sp"/>
     </LinearLayout>
 
 </LinearLayout>
