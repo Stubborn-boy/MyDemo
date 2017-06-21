@@ -1,4 +1,4 @@
-package com.example.mydemo.adapter;
+package com.example.mydemo;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;

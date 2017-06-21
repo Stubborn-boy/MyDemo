@@ -1,6 +1,4 @@
-package com.example.mydemo.entity;
-
-import java.io.Serializable;
+package com.example.mydemo.dingdingcontact.entity;
 
 /**
  * Created by jack on 2017/5/21.

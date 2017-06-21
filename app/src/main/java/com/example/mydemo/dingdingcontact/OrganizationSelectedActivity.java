@@ -1,4 +1,4 @@
-package com.example.mydemo.activity;
+package com.example.mydemo.dingdingcontact;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,10 +9,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mydemo.R;
-import com.example.mydemo.entity.BaseUserVo;
-import com.example.mydemo.entity.EmpUserVo;
-import com.example.mydemo.entity.OrgVo;
-import com.example.mydemo.fragment.OrganizationFragment;
+import com.example.mydemo.dingdingcontact.entity.BaseUserVo;
+import com.example.mydemo.dingdingcontact.entity.EmpUserVo;
+import com.example.mydemo.dingdingcontact.entity.OrgVo;
 
 import java.util.ArrayList;
 import java.util.List;

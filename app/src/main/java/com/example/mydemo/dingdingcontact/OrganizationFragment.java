@@ -1,4 +1,4 @@
-package com.example.mydemo.fragment;
+package com.example.mydemo.dingdingcontact;
 
 import android.app.Activity;
 import android.content.Context;
@@ -24,12 +24,11 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.example.mydemo.R;
-import com.example.mydemo.adapter.OrgContactAdapter;
-import com.example.mydemo.entity.AllVo;
-import com.example.mydemo.entity.BaseUserVo;
-import com.example.mydemo.entity.EmpUserVo;
-import com.example.mydemo.entity.OrgVo;
-import com.example.mydemo.entity.ResultVo;
+import com.example.mydemo.dingdingcontact.entity.AllVo;
+import com.example.mydemo.dingdingcontact.entity.BaseUserVo;
+import com.example.mydemo.dingdingcontact.entity.EmpUserVo;
+import com.example.mydemo.dingdingcontact.entity.OrgVo;
+import com.example.mydemo.dingdingcontact.entity.ResultVo;
 import com.example.mydemo.utils.LogUtils;
 import com.example.mydemo.utils.SizeUtils;
 import com.example.mydemo.view.RecyclerViewItemDecoration;

@@ -1,4 +1,4 @@
-package com.example.mydemo.adapter;
+package com.example.mydemo.dingdingcontact;
 
 import android.graphics.Color;
 import android.view.View;
@@ -10,10 +10,10 @@ import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.example.mydemo.R;
-import com.example.mydemo.entity.AllVo;
-import com.example.mydemo.entity.BaseUserVo;
-import com.example.mydemo.entity.EmpUserVo;
-import com.example.mydemo.entity.OrgVo;
+import com.example.mydemo.dingdingcontact.entity.AllVo;
+import com.example.mydemo.dingdingcontact.entity.BaseUserVo;
+import com.example.mydemo.dingdingcontact.entity.EmpUserVo;
+import com.example.mydemo.dingdingcontact.entity.OrgVo;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -18,8 +18,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.OrgContactActivity"/>
-        <activity android:name=".activity.OrganizationSelectedActivity"/>
+        <activity android:name=".dingdingcontact.OrganizationSelectedActivity"/>
     </application>
 
 </manifest>

@@ -1,7 +1,7 @@
-package com.example.mydemo.entity;
+package com.example.mydemo.dingdingcontact.entity;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
-import com.example.mydemo.adapter.OrgContactAdapter;
+import com.example.mydemo.dingdingcontact.OrgContactAdapter;
 
 
 public class EmpUserVo extends BaseUserVo implements MultiItemEntity, java.io.Serializable {

@@ -8,9 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.example.mydemo.activity.OrgContactActivity;
-import com.example.mydemo.activity.OrganizationSelectedActivity;
-import com.example.mydemo.adapter.MainItemAdapter;
+import com.example.mydemo.dingdingcontact.OrganizationSelectedActivity;
 import com.example.mydemo.view.RecyclerViewItemDecoration;
 
 import java.util.ArrayList;
@@ -61,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements BaseQuickAdapter.
         Intent intent;
         switch (position){
             case 0:
-                intent = new Intent(MainActivity.this, OrgContactActivity.class);
+                intent = new Intent(MainActivity.this, OrganizationSelectedActivity.class);
                 startActivity(intent);
                 break;
             case 1:

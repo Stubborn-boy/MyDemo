@@ -1,4 +1,4 @@
-package com.example.mydemo.entity;
+package com.example.mydemo.dingdingcontact.entity;
 
 import com.google.gson.annotations.SerializedName;
 
