@@ -19,6 +19,7 @@
         </activity>
 
         <activity android:name=".dingdingcontact.OrganizationSelectedActivity"/>
+        <activity android:name=".dingdingcontact.ContactsSelectedActivity"/>
     </application>
 
 </manifest>

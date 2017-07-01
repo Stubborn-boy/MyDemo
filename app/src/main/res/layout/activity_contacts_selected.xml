@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--<include layout="@layout/toolbar_layout" />-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/ll_compny"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="组织通讯录"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_person"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="个人通讯录"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </FrameLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tv_selected_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:maxLines="1"
+            android:text="已选择:"
+            android:textColor="#00A0E9"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/btn_finish"
+            android:layout_width="wrap_content"
+            android:layout_height="35dip"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="10dip"
+            android:background="@drawable/btn_text"
+            android:padding="5dp"
+            android:gravity="center"
+            android:text="确定(0/500)"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+</LinearLayout>

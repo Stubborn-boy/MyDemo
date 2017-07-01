@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.example.mydemo.dingdingcontact.ContactsSelectedActivity;
 import com.example.mydemo.dingdingcontact.OrganizationSelectedActivity;
 import com.example.mydemo.view.RecyclerViewItemDecoration;
 
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements BaseQuickAdapter.
                 startActivity(intent);
                 break;
             case 1:
-                intent = new Intent(MainActivity.this, OrganizationSelectedActivity.class);
+                intent = new Intent(MainActivity.this, ContactsSelectedActivity.class);
                 startActivity(intent);
                 break;
         }

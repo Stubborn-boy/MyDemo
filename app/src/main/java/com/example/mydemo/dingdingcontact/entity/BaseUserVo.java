@@ -12,8 +12,8 @@ public class BaseUserVo implements Serializable {
     @SerializedName(value = "uid", alternate = {"id", "userId"})
     protected String uid;
     protected String account;//账号
-    protected String userName;// 好友姓名
-    protected String picture;
+    protected String userName;// 姓名
+    protected String picture;//头像
 
     public String getUid() {
         return uid;
