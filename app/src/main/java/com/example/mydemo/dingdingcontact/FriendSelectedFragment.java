@@ -22,17 +22,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
+import com.example.baselibrary.utils.LogUtils;
 import com.example.mydemo.R;
-import com.example.mydemo.dingdingcontact.entity.AllVo;
 import com.example.mydemo.dingdingcontact.entity.BaseUserVo;
 import com.example.mydemo.dingdingcontact.entity.EmpUserVo;
 import com.example.mydemo.dingdingcontact.entity.FriendMesVo;
 import com.example.mydemo.dingdingcontact.entity.OrgVo;
 import com.example.mydemo.dingdingcontact.entity.PageDateVo;
 import com.example.mydemo.dingdingcontact.entity.ResultVo;
-import com.example.mydemo.utils.LogUtils;
 import com.example.mydemo.utils.SizeUtils;
 import com.example.mydemo.view.RecyclerViewItemDecoration;
 import com.google.gson.Gson;
