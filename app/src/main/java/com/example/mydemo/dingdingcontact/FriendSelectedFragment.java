@@ -31,7 +31,7 @@ import com.example.mydemo.dingdingcontact.entity.FriendMesVo;
 import com.example.mydemo.dingdingcontact.entity.OrgVo;
 import com.example.mydemo.dingdingcontact.entity.PageDateVo;
 import com.example.mydemo.dingdingcontact.entity.ResultVo;
-import com.example.mydemo.utils.SizeUtils;
+import com.example.baselibrary.utils.SizeUtils;
 import com.example.mydemo.view.RecyclerViewItemDecoration;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

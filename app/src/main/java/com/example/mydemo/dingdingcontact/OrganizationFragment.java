@@ -30,7 +30,7 @@ import com.example.mydemo.dingdingcontact.entity.BaseUserVo;
 import com.example.mydemo.dingdingcontact.entity.EmpUserVo;
 import com.example.mydemo.dingdingcontact.entity.OrgVo;
 import com.example.mydemo.dingdingcontact.entity.ResultVo;
-import com.example.mydemo.utils.SizeUtils;
+import com.example.baselibrary.utils.SizeUtils;
 import com.example.mydemo.view.RecyclerViewItemDecoration;
 import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;

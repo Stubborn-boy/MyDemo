@@ -1,13 +1,12 @@
 package com.example.mydemo;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.example.baselibrary.base.BaseActivity;
 import com.example.mydemo.dingdingcontact.ContactsSelectedActivity;
 import com.example.mydemo.dingdingcontact.OrganizationSelectedActivity;
 import com.example.mydemo.view.RecyclerViewItemDecoration;
@@ -15,7 +14,7 @@ import com.example.mydemo.view.RecyclerViewItemDecoration;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements BaseQuickAdapter.OnItemClickListener {
+public class MainActivity extends BaseActivity implements BaseQuickAdapter.OnItemClickListener {
 
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
@@ -23,9 +22,12 @@ public class MainActivity extends AppCompatActivity implements BaseQuickAdapter.
     private List<String> list = new ArrayList<>();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected int getLayoutId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    protected void initView() {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -44,11 +46,11 @@ public class MainActivity extends AppCompatActivity implements BaseQuickAdapter.
 
         adapter = new MainItemAdapter();
         recyclerView.setAdapter(adapter);
-        initData();
         adapter.setOnItemClickListener(this);
     }
 
-    private void initData() {
+    @Override
+    protected void initData() {
         list.add("demo1");
         list.add("demo2");
         list.add("demo3");

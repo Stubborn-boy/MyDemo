@@ -1,13 +1,10 @@
 package com.example.mydemo.dingdingcontact;
 
-import android.content.Context;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.baselibrary.base.BaseActivity;
 import com.example.mydemo.R;
 import com.example.mydemo.dingdingcontact.entity.BaseUserVo;
 import com.example.mydemo.dingdingcontact.entity.EmpUserVo;
@@ -20,25 +17,26 @@ import java.util.List;
  * Created by ZTH-003 on 2017/5/22.
  */
 
-public class OrganizationSelectedActivity extends AppCompatActivity implements OrganizationFragment.OrganizationCallBack {
+public class OrganizationSelectedActivity extends BaseActivity implements OrganizationFragment.OrganizationCallBack {
 
     List<BaseUserVo> previousEmpList = new ArrayList<>();
     private List<EmpUserVo> tmpSelectEmpList;
     private TextView tv_selected_user;
     private TextView btn_finish;
     private boolean isSelected = false;
-    private Context context;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_organization);
-        context = this;
-        initView();
-        initData();
+    protected int getLayoutId() {
+        return R.layout.activity_organization;
     }
 
+    private void initToobar() {
+        setTitle("Demo1");
+    }
+
+    @Override
     protected void initView() {
+        initToobar();
         tv_selected_user = (TextView) findViewById(R.id.tv_selected_user);
         btn_finish = (TextView) findViewById(R.id.btn_finish);
         OrganizationFragment organizationFragment = new OrganizationFragment();
@@ -50,6 +48,7 @@ public class OrganizationSelectedActivity extends AppCompatActivity implements O
         getSupportFragmentManager().beginTransaction().add(R.id.container, organizationFragment).commit();
     }
 
+    @Override
     protected void initData() {
         btn_finish.setText("确定(0/500)");
         btn_finish.setOnClickListener(new View.OnClickListener() {

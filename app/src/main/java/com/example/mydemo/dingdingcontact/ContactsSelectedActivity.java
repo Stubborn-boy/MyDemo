@@ -1,15 +1,12 @@
 package com.example.mydemo.dingdingcontact;
 
-import android.content.Context;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.baselibrary.base.BaseActivity;
 import com.example.mydemo.R;
 import com.example.mydemo.dingdingcontact.entity.BaseUserVo;
 import com.example.mydemo.dingdingcontact.entity.EmpUserVo;
@@ -22,7 +19,7 @@ import java.util.List;
  * Created by ZTH-003 on 2017/5/22.
  */
 
-public class ContactsSelectedActivity extends AppCompatActivity implements CompanyFragment.OrganizationCallBack, FriendSelectedFragment.FriendSelectedCallBack {
+public class ContactsSelectedActivity extends BaseActivity implements CompanyFragment.OrganizationCallBack, FriendSelectedFragment.FriendSelectedCallBack {
 
     private LinearLayout ll_company;
     private LinearLayout ll_person;
@@ -35,17 +32,14 @@ public class ContactsSelectedActivity extends AppCompatActivity implements Compa
     private List<EmpUserVo> tmpSelectEmpList = new ArrayList<>();
     private List<OrgVo> tmpSelectOrgList = new ArrayList<>();
     private boolean isSelected = false;
-    private Context context;
+
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_contacts_selected);
-        context = this;
-        initView();
-        initData();
+    protected int getLayoutId() {
+        return R.layout.activity_contacts_selected;
     }
 
+    @Override
     protected void initView() {
         ll_company = (LinearLayout) findViewById(R.id.ll_compny);
         ll_person = (LinearLayout) findViewById(R.id.ll_person);
@@ -60,6 +54,7 @@ public class ContactsSelectedActivity extends AppCompatActivity implements Compa
         //getSupportFragmentManager().beginTransaction().add(R.id.container, companyFragment).commit();
     }
 
+    @Override
     protected void initData() {
         btn_finish.setText("确定(0/500)");
         btn_finish.setOnClickListener(new View.OnClickListener() {
