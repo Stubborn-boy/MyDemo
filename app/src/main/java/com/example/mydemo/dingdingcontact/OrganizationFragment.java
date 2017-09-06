@@ -24,23 +24,23 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.example.baselibrary.utils.LogUtils;
+import com.example.baselibrary.utils.SizeUtils;
 import com.example.mydemo.R;
 import com.example.mydemo.dingdingcontact.entity.AllVo;
 import com.example.mydemo.dingdingcontact.entity.BaseUserVo;
 import com.example.mydemo.dingdingcontact.entity.EmpUserVo;
 import com.example.mydemo.dingdingcontact.entity.OrgVo;
 import com.example.mydemo.dingdingcontact.entity.ResultVo;
-import com.example.baselibrary.utils.SizeUtils;
+import com.example.mydemo.http.RetrofitClient;
 import com.example.mydemo.view.RecyclerViewItemDecoration;
 import com.google.gson.Gson;
-import com.lzy.okgo.OkGo;
-import com.lzy.okgo.callback.StringCallback;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.Call;
-import okhttp3.Response;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subscribers.ResourceSubscriber;
 
 
 /**
@@ -168,24 +168,15 @@ public class OrganizationFragment extends Fragment implements BaseQuickAdapter.O
         orgList.clear();
         empList.clear();
         adapter.notifyDataSetChanged();
-        String url = "http://101.201.108.172:8280/masCustomer/service/UserInfoService/getEmployeeOrg";
-        OkGo.post(url)
-                .tag(this)
-                .params("servId", "")
-                .params("orgCode", code)
-                .params("servId", "")
-                .params("loginId", "1213")
-                .params("token", "311f4f508d776b115827e76bd11ae724")
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Response response, Exception e) {
-                        LogUtils.e(e.toString());
-                    }
 
+        RetrofitClient.getInstance(context).getApiService()
+                .getOrgContacts("", code, "1213", "311f4f508d776b115827e76bd11ae724")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ResourceSubscriber<ResultVo>() {
                     @Override
-                    public void onSuccess(String s, Call call, Response response) {
+                    public void onNext(ResultVo resultVo) {
                         Gson gson = new Gson();
-                        ResultVo resultVo = gson.fromJson(s, ResultVo.class);
                         String json = gson.toJson(resultVo.getMsg());
                         OrgVo orgVo = gson.fromJson(json, OrgVo.class);
                         if(orgVo!=null) {
@@ -195,60 +186,18 @@ public class OrganizationFragment extends Fragment implements BaseQuickAdapter.O
                             handleData(orgVo);
                         }
                     }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        LogUtils.e(t.toString());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
                 });
     }
-
-//    private void getOrgContacts(String code){
-//        list.clear();
-//        orgList.clear();
-//        empList.clear();
-//        adapter.notifyDataSetChanged();
-//
-//        recyclerView.setVisibility(View.GONE);
-//        String uid = MarketUtils.getUserInfo(context).getUid();
-//        RequestParams params = new RequestParams();
-//        params.addBodyParameter("servId", "");
-//        params.addBodyParameter("orgCode", code);
-//        params.addBodyParameter("loginId", uid);
-//        params.addBodyParameter("token", MarketUtils.getUserInfo(context).getToken());
-//        httpUtils = new HttpUtils();
-//        //设置当前请求的缓存时间
-//        httpUtils.configDefaultHttpCacheExpiry(10000);
-//        //设置线程数
-//        httpUtils.configRequestThreadPoolSize(10);
-//        httpUtils.configResponseTextCharset("utf-8");
-//        handler = httpUtils.send(HttpRequest.HttpMethod.POST, ZTConstant.GET_ORG_CONTACTS_URL, params, new RequestCallBack<String>() {
-//            @Override
-//            public void onSuccess(ResponseInfo<String> responseInfo) {
-//                if (progressBar != null)
-//                    progressBar.setVisibility(View.GONE);
-//                if (recyclerView != null)
-//                    recyclerView.setVisibility(View.VISIBLE);
-//                MyLogger.commLog().e(responseInfo.result);
-//                ResultVo rVo = ResultParser.parseJSON(responseInfo.result, ResultVo.class);
-//                if (rVo != null) {
-//                    String result = rVo.getResult();
-//                    MyLogger.commLog().e("result--->" + rVo.getMsg().toString());
-//                    if (!TextUtils.isEmpty(result) && "success".equals(result)) {
-//                        Gson gson = new Gson();
-//                        String json = gson.toJson(rVo.getMsg());
-//                        OrgVo orgVo = ResultParser.parseJSON(json, OrgVo.class);
-//                        if (orgVo != null && ll_shortcut != null) {
-//                            if (ll_shortcut.getChildCount() == 0) {
-//                                addView2HorizontalScrollView(orgVo);
-//                            }
-//                            handleData(orgVo);
-//                        }
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(HttpException e, String s) {
-//                MyLogger.commLog().e(s);
-//            }
-//        });
-//    }
 
     private void handleData(OrgVo orgVo) {
         curAllVo = new AllVo();

@@ -24,23 +24,23 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.example.baselibrary.utils.LogUtils;
+import com.example.baselibrary.utils.SizeUtils;
 import com.example.mydemo.R;
 import com.example.mydemo.dingdingcontact.entity.AllVo;
 import com.example.mydemo.dingdingcontact.entity.BaseUserVo;
 import com.example.mydemo.dingdingcontact.entity.EmpUserVo;
 import com.example.mydemo.dingdingcontact.entity.OrgVo;
 import com.example.mydemo.dingdingcontact.entity.ResultVo;
-import com.example.baselibrary.utils.SizeUtils;
+import com.example.mydemo.http.RetrofitClient;
 import com.example.mydemo.view.RecyclerViewItemDecoration;
 import com.google.gson.Gson;
-import com.lzy.okgo.OkGo;
-import com.lzy.okgo.callback.StringCallback;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.Call;
-import okhttp3.Response;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subscribers.ResourceSubscriber;
 
 
 /**
@@ -200,24 +200,15 @@ public class CompanyFragment extends Fragment implements BaseQuickAdapter.OnItem
         orgList.clear();
         empList.clear();
         adapter.notifyDataSetChanged();
-        String url = "http://101.201.108.172:8280/masCustomer/service/UserInfoService/getEmployeeOrg";
-        OkGo.post(url)
-                .tag(this)
-                .params("servId", "")
-                .params("orgCode", code)
-                .params("servId", "")
-                .params("loginId", "1213")
-                .params("token", "311f4f508d776b115827e76bd11ae724")
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Response response, Exception e) {
-                        LogUtils.e(e.toString());
-                    }
 
+        RetrofitClient.getInstance(context).getApiService()
+                .getOrgContacts("", code, "1213", "311f4f508d776b115827e76bd11ae724")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ResourceSubscriber<ResultVo>() {
                     @Override
-                    public void onSuccess(String s, Call call, Response response) {
+                    public void onNext(ResultVo resultVo) {
                         Gson gson = new Gson();
-                        ResultVo resultVo = gson.fromJson(s, ResultVo.class);
                         String json = gson.toJson(resultVo.getMsg());
                         OrgVo orgVo = gson.fromJson(json, OrgVo.class);
                         if(orgVo!=null) {
@@ -226,6 +217,16 @@ public class CompanyFragment extends Fragment implements BaseQuickAdapter.OnItem
                             }
                             handleData(orgVo);
                         }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        LogUtils.e(t.toString());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 });
     }
