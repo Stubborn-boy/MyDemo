@@ -8,14 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.trello.rxlifecycle2.components.RxFragment;
+import com.example.baselibrary.mvp.BaseContract;
+import com.trello.rxlifecycle2.components.support.RxFragment;
+
 
 /**
  * Created by 71541 on 2017/9/5.
  */
 
-public abstract class BaseFragment extends RxFragment {
+public abstract class BaseFragment<T extends BaseContract.BasePresenter> extends RxFragment {
 
+    public T mPresenter;
     protected Context context;
     protected Activity activity;
     private boolean isViewPrepared; // 标识fragment视图已经初始化完毕
@@ -32,7 +35,10 @@ public abstract class BaseFragment extends RxFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(getLayoutId(), null, false);
-        initView();
+        initView(view);
+        if(mPresenter!=null) {
+            mPresenter.attachView(this);
+        }
         initData();
         isViewPrepared = true;
         return view;
@@ -44,7 +50,7 @@ public abstract class BaseFragment extends RxFragment {
      */
     protected abstract int getLayoutId();
 
-    protected abstract void initView();
+    protected abstract void initView(View view);
 
     protected abstract void initData();
 
@@ -66,5 +72,8 @@ public abstract class BaseFragment extends RxFragment {
     public void onDestroy() {
         super.onDestroy();
         isViewPrepared = true;
+        if(mPresenter!=null) {
+            mPresenter.detachView();
+        }
     }
 }

@@ -1,13 +1,19 @@
 package com.example.mydemo.dingdingcontact;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
@@ -17,7 +23,6 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
-import com.example.baselibrary.base.BaseFragment;
 import com.example.baselibrary.utils.LogUtils;
 import com.example.baselibrary.utils.SizeUtils;
 import com.example.mydemo.R;
@@ -26,26 +31,29 @@ import com.example.mydemo.dingdingcontact.entity.BaseUserVo;
 import com.example.mydemo.dingdingcontact.entity.EmpUserVo;
 import com.example.mydemo.dingdingcontact.entity.OrgVo;
 import com.example.mydemo.dingdingcontact.entity.ResultVo;
-import com.example.mydemo.dingdingcontact.mvp.IOrganizationView;
-import com.example.mydemo.dingdingcontact.mvp.OrganizationPresenter;
+import com.example.mydemo.http.RetrofitClient;
 import com.example.mydemo.view.RecyclerViewItemDecoration;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subscribers.ResourceSubscriber;
 
 
 /**
  * Created by 71541 on 2017/5/22.
  */
 
-public class OrganizationFragment extends BaseFragment<OrganizationPresenter> implements IOrganizationView, BaseQuickAdapter.OnItemClickListener, OrgContactAdapter.OnSubordinateClickListener{
+public class OrganizationFragment2 extends Fragment implements BaseQuickAdapter.OnItemClickListener, OrgContactAdapter.OnSubordinateClickListener{
 
     HorizontalScrollView horizontalScrollView;
     LinearLayout ll_shortcut;
     RecyclerView recyclerView;
 
+    private Context context;
     private LinearLayoutManager linearLayoutManager;
     private OrgContactAdapter adapter;
     private List<MultiItemEntity> list = new ArrayList<>();
@@ -61,6 +69,7 @@ public class OrganizationFragment extends BaseFragment<OrganizationPresenter> im
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        context = activity;
         organizationCallBack = (OrganizationCallBack)activity;
     }
 
@@ -68,19 +77,19 @@ public class OrganizationFragment extends BaseFragment<OrganizationPresenter> im
         void selectOrgEmpUser(List<OrgVo> selectOrgList, List<EmpUserVo> selectEmpList);
     }
 
+    @Nullable
     @Override
-    protected int getLayoutId() {
-        return R.layout.fragment_org_contact;
-    }
-
-    @Override
-    protected void initView(View view) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_org_contact, null, false);
         horizontalScrollView = (HorizontalScrollView)view.findViewById(R.id.horizontalScrollView);
         ll_shortcut = (LinearLayout)view.findViewById(R.id.ll_shortcut);
         recyclerView = (RecyclerView)view.findViewById(R.id.recyclerView);
+        intview();
+        initDate();
+        return view;
+    }
 
-        mPresenter = new OrganizationPresenter();
-
+    protected void intview() {
         linearLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.addItemDecoration(new RecyclerViewItemDecoration.Builder(context)
@@ -94,8 +103,7 @@ public class OrganizationFragment extends BaseFragment<OrganizationPresenter> im
         adapter.setOnSubordinateClickListener(this);
     }
 
-    @Override
-    protected void initData() {
+    protected void initDate() {
         getOrgContacts("");
     }
 
@@ -161,30 +169,34 @@ public class OrganizationFragment extends BaseFragment<OrganizationPresenter> im
         empList.clear();
         adapter.notifyDataSetChanged();
 
-        mPresenter.loadData(context, code);
-    }
+        RetrofitClient.getInstance(context).getApiService()
+                .getOrgContacts("", code, "1213", "311f4f508d776b115827e76bd11ae724")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ResourceSubscriber<ResultVo>() {
+                    @Override
+                    public void onNext(ResultVo resultVo) {
+                        Gson gson = new Gson();
+                        String json = gson.toJson(resultVo.getMsg());
+                        OrgVo orgVo = gson.fromJson(json, OrgVo.class);
+                        if(orgVo!=null) {
+                            if(ll_shortcut.getChildCount()==0) {
+                                addView2HorizontalScrollView(orgVo);
+                            }
+                            handleData(orgVo);
+                        }
+                    }
 
-    @Override
-    public void showData(ResultVo resultVo) {
-        Gson gson = new Gson();
-        String json = gson.toJson(resultVo.getMsg());
-        OrgVo orgVo = gson.fromJson(json, OrgVo.class);
-        if(orgVo!=null) {
-            if(ll_shortcut.getChildCount()==0) {
-                addView2HorizontalScrollView(orgVo);
-            }
-            handleData(orgVo);
-        }
-    }
+                    @Override
+                    public void onError(Throwable t) {
+                        LogUtils.e(t.toString());
+                    }
 
-    @Override
-    public void showError(String msg) {
-        LogUtils.e(msg);
-    }
+                    @Override
+                    public void onComplete() {
 
-    @Override
-    public void complete() {
-
+                    }
+                });
     }
 
     private void handleData(OrgVo orgVo) {

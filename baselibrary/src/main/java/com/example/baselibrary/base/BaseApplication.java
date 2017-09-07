@@ -1,7 +1,8 @@
-package com.example.baselibrary;
+package com.example.baselibrary.base;
 
 import android.app.Application;
 
+import com.example.baselibrary.BuildConfig;
 import com.example.baselibrary.utils.LogUtils;
 import com.example.baselibrary.utils.SPUtils;
 import com.example.baselibrary.utils.ToastUtils;

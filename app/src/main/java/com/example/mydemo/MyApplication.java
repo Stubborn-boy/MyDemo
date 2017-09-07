@@ -3,7 +3,7 @@ package com.example.mydemo;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 
-import com.example.baselibrary.BaseApplication;
+import com.example.baselibrary.base.BaseApplication;
 
 /**
  * Created by jack on 2017/5/21.
