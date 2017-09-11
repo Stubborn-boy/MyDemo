@@ -87,11 +87,10 @@ public class ToastUtils {
  
     /** 
      * 短时间显示Toast 
-     * 
-     * @param context 
+     *
      * @param message 
      */ 
-    public static void showShort(Context context, int message) {
+    public static void showShort(int message) {
         if (isShow)
             //Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             showToast(message, Toast.LENGTH_SHORT);
@@ -99,11 +98,10 @@ public class ToastUtils {
  
     /** 
      * 长时间显示Toast 
-     * 
-     * @param context 
+     *
      * @param message 
      */ 
-    public static void showLong(Context context, CharSequence message) {
+    public static void showLong(CharSequence message) {
         if (isShow)
             //Toast.makeText(context, message, Toast.LENGTH_LONG).show();
             showToast(message, Toast.LENGTH_LONG);
@@ -111,11 +109,10 @@ public class ToastUtils {
  
     /** 
      * 长时间显示Toast 
-     * 
-     * @param context 
+     *
      * @param message 
      */ 
-    public static void showLong(Context context, int message) {
+    public static void showLong(int message) {
         if (isShow)
             //Toast.makeText(context, message, Toast.LENGTH_LONG).show();
             showToast(message, Toast.LENGTH_LONG);

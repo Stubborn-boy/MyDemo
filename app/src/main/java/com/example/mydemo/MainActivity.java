@@ -9,6 +9,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.baselibrary.base.BaseActivity;
 import com.example.mydemo.dingdingcontact.ContactsSelectedActivity;
 import com.example.mydemo.dingdingcontact.OrganizationSelectedActivity;
+import com.example.mydemo.loginsmooth.LoginSmoothActivity;
 import com.example.mydemo.view.RecyclerViewItemDecoration;
 
 import java.util.ArrayList;
@@ -67,6 +68,10 @@ public class MainActivity extends BaseActivity implements BaseQuickAdapter.OnIte
                 break;
             case 1:
                 intent = new Intent(MainActivity.this, ContactsSelectedActivity.class);
+                startActivity(intent);
+                break;
+            case 2:
+                intent = new Intent(MainActivity.this, LoginSmoothActivity.class);
                 startActivity(intent);
                 break;
         }
