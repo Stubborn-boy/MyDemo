@@ -30,6 +30,7 @@ import com.example.mydemo.dingdingcontact.mvp.IOrganizationView;
 import com.example.mydemo.dingdingcontact.mvp.OrganizationPresenter;
 import com.example.mydemo.view.RecyclerViewItemDecoration;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -168,12 +169,34 @@ public class OrganizationFragment extends BaseFragment<OrganizationPresenter> im
     public void showData(ResultVo resultVo) {
         Gson gson = new Gson();
         String json = gson.toJson(resultVo.getMsg());
-        OrgVo orgVo = gson.fromJson(json, OrgVo.class);
-        if(orgVo!=null) {
-            if(ll_shortcut.getChildCount()==0) {
-                addView2HorizontalScrollView(orgVo);
+        if(json.startsWith("{")) {
+            OrgVo orgVo = gson.fromJson(json, OrgVo.class);
+            if(orgVo!=null) {
+                if(ll_shortcut.getChildCount()==0) {
+                    addView2HorizontalScrollView(orgVo);
+                }
+                handleData(orgVo);
             }
-            handleData(orgVo);
+        }else if(json.startsWith("[")){
+            ArrayList<OrgVo> list = gson.fromJson(json, new TypeToken<ArrayList<OrgVo>>(){}.getType());
+            if(list!=null && list.size()>0){
+                if(list.size()==1) {
+                    if(ll_shortcut.getChildCount()==0) {
+                        addView2HorizontalScrollView(list.get(0));
+                    }
+                    handleData(list.get(0));
+                }else{
+                    if (ll_shortcut.getChildCount() == 0) {
+                        OrgVo orgVo = new OrgVo();
+                        orgVo.setId("0");
+                        orgVo.setName("组织机构");
+                        addView2HorizontalScrollView(orgVo);
+                        orgVo.setOrgVOs(list);
+                        handleData(orgVo);
+                    }
+
+                }
+            }
         }
     }
 
