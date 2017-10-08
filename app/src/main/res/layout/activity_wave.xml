@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="#2b2f33">
+
+            <com.example.mydemo.view.WaveView
+                android:id="@+id/wave"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:wave_color="@color/colorPrimary"
+                app:wave_coreImageRadius="30"
+                app:wave_width="40"/>
+
+            <ImageView
+                android:id="@+id/head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/user"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <com.example.mydemo.view.StateButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#ee26d64c"
+                android:text="Call Now"
+                android:textColor="#fff"
+                app:border_color="#262626"
+                app:corner_radius="@dimen/dp_10"
+                app:border_stroke="5dp"
+                app:unable_color="#999999"/>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".1" />
+
+            <com.example.mydemo.view.StateButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#cccccc"
+                android:text="Custom Button"
+                android:textColor="#000000" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

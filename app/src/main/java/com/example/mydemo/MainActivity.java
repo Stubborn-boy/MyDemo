@@ -7,6 +7,8 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.baselibrary.base.BaseActivity;
+import com.example.mydemo.activity.PswActivity;
+import com.example.mydemo.activity.WaveActivity;
 import com.example.mydemo.dingdingcontact.ContactsSelectedActivity;
 import com.example.mydemo.dingdingcontact.OrganizationSelectedActivity;
 import com.example.mydemo.loginsmooth.LoginSmoothActivity;
@@ -55,6 +57,8 @@ public class MainActivity extends BaseActivity implements BaseQuickAdapter.OnIte
         list.add("demo1");
         list.add("demo2");
         list.add("demo3");
+        list.add("demo4");
+        list.add("demo5");
         adapter.setNewData(list);
     }
 
@@ -72,6 +76,14 @@ public class MainActivity extends BaseActivity implements BaseQuickAdapter.OnIte
                 break;
             case 2:
                 intent = new Intent(MainActivity.this, LoginSmoothActivity.class);
+                startActivity(intent);
+                break;
+            case 3:
+                intent = new Intent(MainActivity.this, PswActivity.class);
+                startActivity(intent);
+                break;
+            case 4:
+                intent = new Intent(MainActivity.this, WaveActivity.class);
                 startActivity(intent);
                 break;
         }

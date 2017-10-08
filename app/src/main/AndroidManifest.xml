@@ -25,6 +25,8 @@
         <activity android:name=".dingdingcontact.OrganizationSelectedActivity"/>
         <activity android:name=".dingdingcontact.ContactsSelectedActivity"/>
         <activity android:name=".loginsmooth.LoginSmoothActivity" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".activity.PswActivity"/>
+        <activity android:name=".activity.WaveActivity"/>
     </application>
 
 </manifest>
