@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.mydemo.R;
 import com.example.mydemo.view.WaveView;
@@ -56,5 +57,9 @@ public class WaveActivity extends Activity {
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         wave.setImageRadius(head.getWidth()/2);
+    }
+
+    public void click(View view) {
+        Toast.makeText(this, "Click", Toast.LENGTH_SHORT).show();
     }
 }

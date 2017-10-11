@@ -61,5 +61,35 @@
                 android:text="Custom Button"
                 android:textColor="#000000" />
         </LinearLayout>
+
+        <com.example.mydemo.view.RCRelativeLayout
+            android:layout_width="240dp"
+            android:layout_height="240dp"
+            android:layout_marginTop="10dp"
+            app:round_as_circle="true"
+            app:round_corner="30dp"
+            app:round_corner_bottom_right="0dp"
+            app:stroke_color="#E39E83"
+            app:stroke_width="4dp">
+
+            <ImageView
+                android:onClick="click"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/test"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_alignParentBottom="true"
+                android:background="#995F5652"
+                android:gravity="center_horizontal"
+                android:text="害怕.png"
+                android:textColor="#fff"
+                android:textSize="24sp"/>
+
+        </com.example.mydemo.view.RCRelativeLayout>
+
     </LinearLayout>
 </ScrollView>
