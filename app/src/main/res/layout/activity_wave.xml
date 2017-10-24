@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -37,6 +38,7 @@
             android:orientation="horizontal">
 
             <com.example.mydemo.view.StateButton
+                android:id="@+id/btn_notify"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -54,6 +56,7 @@
                 android:layout_weight=".1" />
 
             <com.example.mydemo.view.StateButton
+                android:id="@+id/btn_defail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -61,6 +64,15 @@
                 android:text="Custom Button"
                 android:textColor="#000000" />
         </LinearLayout>
+
+        <com.example.mydemo.view.StateButton
+            android:id="@+id/btn_view2bitmap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="#cccccc"
+            android:text="Custom Button"
+            android:textColor="#000000" />
 
         <com.example.mydemo.view.RCRelativeLayout
             android:layout_width="240dp"
