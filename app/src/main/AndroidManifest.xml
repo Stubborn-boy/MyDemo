@@ -32,6 +32,7 @@
         <activity android:name=".activity.WaveActivity"/>
         <activity android:name=".activity.OpenFileActivity"/>
         <activity android:name=".activity.FileDisplayActivity"/>
+        <activity android:name=".activity.ArcHeaderViewPagerActivity"/>
     </application>
 
 </manifest>

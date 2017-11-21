@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.baselibrary.base.BaseActivity;
+import com.example.mydemo.activity.ArcHeaderViewPagerActivity;
 import com.example.mydemo.activity.OpenFileActivity;
 import com.example.mydemo.activity.PswActivity;
 import com.example.mydemo.activity.WaveActivity;
@@ -61,6 +62,7 @@ public class MainActivity extends BaseActivity implements BaseQuickAdapter.OnIte
         list.add("demo4");
         list.add("demo5");
         list.add("demo6");
+        list.add("demo7");
         adapter.setNewData(list);
     }
 
@@ -90,6 +92,10 @@ public class MainActivity extends BaseActivity implements BaseQuickAdapter.OnIte
                 break;
             case 5:
                 intent = new Intent(MainActivity.this, OpenFileActivity.class);
+                startActivity(intent);
+                break;
+            case 6:
+                intent = new Intent(MainActivity.this, ArcHeaderViewPagerActivity.class);
                 startActivity(intent);
                 break;
         }

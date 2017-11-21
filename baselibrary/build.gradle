@@ -7,7 +7,7 @@ android {
     buildToolsVersion "26.0.2"
 
     defaultConfig {
-        minSdkVersion 14
+        minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -60,5 +60,7 @@ dependencies {
     //dagger2
     compile 'com.google.dagger:dagger:2.11'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
+
+    compile 'com.github.pinguo-zhouwei:MZBannerView:v2.0.0'
 }
 
