@@ -33,6 +33,7 @@
         <activity android:name=".activity.OpenFileActivity"/>
         <activity android:name=".activity.FileDisplayActivity"/>
         <activity android:name=".activity.ArcHeaderViewPagerActivity"/>
+        <activity android:name=".activity.Rotate3dActivity"/>
     </application>
 
 </manifest>

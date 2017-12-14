@@ -10,6 +10,7 @@ import com.example.baselibrary.base.BaseActivity;
 import com.example.mydemo.activity.ArcHeaderViewPagerActivity;
 import com.example.mydemo.activity.OpenFileActivity;
 import com.example.mydemo.activity.PswActivity;
+import com.example.mydemo.activity.Rotate3dActivity;
 import com.example.mydemo.activity.WaveActivity;
 import com.example.mydemo.dingdingcontact.ContactsSelectedActivity;
 import com.example.mydemo.dingdingcontact.OrganizationSelectedActivity;
@@ -56,6 +57,7 @@ public class MainActivity extends BaseActivity implements BaseQuickAdapter.OnIte
 
     @Override
     protected void initData() {
+        list.add("demo0");
         list.add("demo1");
         list.add("demo2");
         list.add("demo3");
@@ -96,6 +98,10 @@ public class MainActivity extends BaseActivity implements BaseQuickAdapter.OnIte
                 break;
             case 6:
                 intent = new Intent(MainActivity.this, ArcHeaderViewPagerActivity.class);
+                startActivity(intent);
+                break;
+            case 7:
+                intent = new Intent(MainActivity.this, Rotate3dActivity.class);
                 startActivity(intent);
                 break;
         }
