@@ -6,7 +6,7 @@ import android.view.animation.Animation;
 import android.view.animation.Transformation;
 
 /**
- * Created by libo on 2017/11/2.
+ * http://www.jianshu.com/p/1e56fc6a6865
  */
 
 public class Rotate3D extends Animation {
