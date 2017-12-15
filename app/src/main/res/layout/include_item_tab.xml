@@ -3,11 +3,90 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center_horizontal">
 
     <TextView
+        android:id="@+id/tv_ForegroundColorSpan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="图文详情"/>
+        android:layout_marginTop="10dp"
+        android:text="ForegroundColorSpan"/>
+
+    <TextView
+        android:id="@+id/tv_BackgroundColorSpan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="BackgroundColorSpan"/>
+
+    <TextView
+        android:id="@+id/tv_StrikethroughSpan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="StrikethroughSpan"/>
+
+    <TextView
+        android:id="@+id/tv_UnderlineSpan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="UnderlineSpan"/>
+
+    <TextView
+        android:id="@+id/tv_ScaleXSpan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="ScaleXSpan"/>
+
+    <TextView
+        android:id="@+id/tv_RelativeSizeSpan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="RelativeSizeSpan"/>
+
+    <TextView
+        android:id="@+id/tv_SuperscriptSpan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="SuperscriptSpan"/>
+
+    <TextView
+        android:id="@+id/tv_SubscriptSpan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="SubscriptSpan"/>
+
+    <TextView
+        android:id="@+id/tv_StyleSpan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="StyleSpan"/>
+
+    <TextView
+        android:id="@+id/tv_ImageSpan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="ImageSpan"/>
+
+    <TextView
+        android:id="@+id/tv_ClickableSpan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="ClickableSpan"/>
+
+    <TextView
+        android:id="@+id/tv_URLSpan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="URLSpan"/>
 
 </LinearLayout>
