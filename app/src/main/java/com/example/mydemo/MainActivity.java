@@ -8,6 +8,7 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.baselibrary.base.BaseActivity;
 import com.example.mydemo.activity.ArcHeaderViewPagerActivity;
+import com.example.mydemo.activity.GoodsInfoActivity;
 import com.example.mydemo.activity.OpenFileActivity;
 import com.example.mydemo.activity.PswActivity;
 import com.example.mydemo.activity.Rotate3dActivity;
@@ -65,6 +66,7 @@ public class MainActivity extends BaseActivity implements BaseQuickAdapter.OnIte
         list.add("demo5");
         list.add("demo6");
         list.add("demo7");
+        list.add("demo8");
         adapter.setNewData(list);
     }
 
@@ -102,6 +104,10 @@ public class MainActivity extends BaseActivity implements BaseQuickAdapter.OnIte
                 break;
             case 7:
                 intent = new Intent(MainActivity.this, Rotate3dActivity.class);
+                startActivity(intent);
+                break;
+            case 8:
+                intent = new Intent(MainActivity.this, GoodsInfoActivity.class);
                 startActivity(intent);
                 break;
         }

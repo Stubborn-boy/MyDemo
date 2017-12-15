@@ -34,6 +34,7 @@
         <activity android:name=".activity.FileDisplayActivity"/>
         <activity android:name=".activity.ArcHeaderViewPagerActivity"/>
         <activity android:name=".activity.Rotate3dActivity"/>
+        <activity android:name=".activity.GoodsInfoActivity"/>
     </application>
 
 </manifest>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <com.example.mydemo.view.SlideDetailsLayout
+            android:id="@+id/sv_switch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ScrollView
+                android:id="@+id/sv_goods_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#eeeff3"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/ll_recommend"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:background="#ffffff"
+                        android:orientation="vertical"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="700dp"
+                            android:layout_marginBottom="14dp"
+                            android:layout_marginTop="14dp"
+                            android:gravity="center"
+                            android:text="信息"
+                            android:textColor="#222222"
+                            android:textSize="13dp" />
+
+                    </LinearLayout>
+
+                    <!-- 上拉查看图文详情 -->
+                    <LinearLayout
+                        android:id="@+id/ll_pull_up"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@android:color/white"
+                        android:clickable="true"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="6dp"
+                            android:text="上拉查看图文详情"
+                            android:textColor="#222222"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+
+            <include layout="@layout/include_item_tab" />
+        </com.example.mydemo.view.SlideDetailsLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_up_slide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="30dp"
+            android:src="@drawable/go_top"
+            app:backgroundTint="#ffffff"
+            app:borderWidth="0dp"
+            app:fabSize="mini"
+            app:rippleColor="#ffffff" />
+    </android.support.design.widget.CoordinatorLayout>
+
+</LinearLayout>
