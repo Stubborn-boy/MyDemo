@@ -89,4 +89,11 @@
         android:layout_marginTop="10dp"
         android:text="URLSpan"/>
 
+    <TextView
+        android:id="@+id/tv_Expand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="索引 简单的说，索引就像书本的目录，目录可以快速找到所在页数，数据库中索引可以帮助快速找到数据，而不用全表扫描，合适的索引可以大大提高数据库查询的效率。"/>
+
 </LinearLayout>

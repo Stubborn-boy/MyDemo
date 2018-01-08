@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.baselibrary.base.BaseActivity;
+import com.example.baselibrary.utils.MyUtils;
 import com.example.mydemo.R;
 import com.example.mydemo.view.SlideDetailsLayout;
 
@@ -39,6 +40,7 @@ public class GoodsInfoActivity extends BaseActivity implements View.OnClickListe
     private ScrollView sv_goods_info;
     private LinearLayout llPullUp;
     private FloatingActionButton fabUpSlide;
+    private boolean isExpandDescripe;
 
     @Override
     protected int getLayoutId() {
@@ -179,5 +181,30 @@ public class GoodsInfoActivity extends BaseActivity implements View.OnClickListe
         spannableString.setSpan(new URLSpan("http://www.jianshu.com"), 12, 16, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         tv_URLSpan.setMovementMethod(LinkMovementMethod.getInstance());
         tv_URLSpan.setText(spannableString);
+
+        final TextView tv_Expand = (TextView) findViewById(R.id.tv_Expand);
+        final String strExpand = "索引 简单的说，索引就像书本的目录，目录可以快速找到所在页数，数据库中索引可以帮助快速找到数据，而不用全表扫描，合适的索引可以大大提高数据库查询的效率。";
+        MyUtils.toggleEllipsize(context,
+                tv_Expand, 2,
+                strExpand,
+                "展开全部  ",
+                R.color.colorAccent, isExpandDescripe);
+        tv_Expand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isExpandDescripe) {
+                    isExpandDescripe = false;
+                    tv_Expand.setMaxLines(2);// 收起
+                } else {
+                    isExpandDescripe = true;
+                    tv_Expand.setMaxLines(Integer.MAX_VALUE);// 展开
+                }
+                MyUtils.toggleEllipsize(context,
+                        tv_Expand, 2,
+                        strExpand,
+                        "展开全部  ",
+                        R.color.colorAccent, isExpandDescripe);
+            }
+        });
     }
 }
