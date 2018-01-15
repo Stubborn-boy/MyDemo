@@ -35,6 +35,7 @@ public abstract class BaseFragment<T extends BaseContract.BasePresenter> extends
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(getLayoutId(), null, false);
+        view.setClickable(true);// 防止点击穿透，底层的fragment响应上层点击触摸事件
         initView(view);
         if(mPresenter!=null) {
             mPresenter.attachView(this);
